@@ -7,5 +7,5 @@ app.get('/', function(req, res) {
 });
 
 app.listen(port, function() {
-  console.log('Server running at http://localhost:' + port);
+  console.log('Gulp is running on http://localhost:' + port);
 });
