@@ -1,0 +1,29 @@
+{
+  "name": "scorefa",
+  "version": "1.0.0",
+  "description": "It's an app of american football games and scores",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/augustovictor/scorefa.git"
+  },
+  "keywords": [
+    "american football",
+    "football",
+    "score",
+    "game"
+  ],
+  "author": "Victor Augusto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/augustovictor/scorefa/issues"
+  },
+  "homepage": "https://github.com/augustovictor/scorefa#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
