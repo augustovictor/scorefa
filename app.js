@@ -36,6 +36,11 @@ teamRouter.route('/teams')
           res.json(teams);
         }
       });
+    })
+    .post(function(req, res) {
+      var team = new Team(req.body); // Only creates a new instance of team
+      team.save();
+      res.send(201).send(team); // Created
     });
 
 teamRouter.route('/teams/:id')
