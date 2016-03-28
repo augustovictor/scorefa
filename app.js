@@ -1,14 +1,21 @@
 // Modules
-var express  = require('express');
-var mongoose = require('mongoose');
+var express    = require('express');
+var mongoose   = require('mongoose');
+var bodyParser = require('body-parser');
 // Definitions
-var app  = express();
-var port = process.env.PORT || 3000;
+var app        = express();
+var port       = process.env.PORT || 3000;
 var teamRouter = express.Router();
-var db;
 
 // DB Connection
-db = mongoose.connect('mongodb://localhost/scorefaAPI');
+var db = mongoose.connect('mongodb://localhost/scorefaAPI');
+
+// Middlewares
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(bodyParser.json());
 
 //Models
 var Team = require('./models/teamModel');
@@ -17,13 +24,12 @@ var Team = require('./models/teamModel');
 app.use('/api', teamRouter);
 teamRouter.route('/teams')
     .get(function(req, res) {
-      var query = {};
-      if (req.query.name) {
-        query.name = req.query.name;
-      }
-
-      Team.find(query, function(err, teams) {
-        res.json(teams);
+      Team.find(function(err, teams) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json(teams);
+        }
       });
     });
 
