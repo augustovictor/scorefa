@@ -36,7 +36,7 @@ var teamController = function(Team) {
   var post = function(req, res) {
     var team = new Team(req.body); // Only creates a new instance of team
     team.save();
-    res.send(201).send(team); // Created
+    res.status(201).send(team); // Created
   };
 
   var put = function(req, res) {
