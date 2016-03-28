@@ -24,11 +24,27 @@ var Team = require('./models/teamModel');
 app.use('/api', teamRouter);
 teamRouter.route('/teams')
     .get(function(req, res) {
-      Team.find(function(err, teams) {
+      var query = {};
+      if (req.query.name) {
+        query.name = req.query.name;
+      }
+
+      Team.find(query, function(err, teams) {
         if (err) {
           res.status(500).send(err);
         } else {
           res.json(teams);
+        }
+      });
+    });
+
+teamRouter.route('/teams/:id')
+    .get(function(req, res) {
+      Team.findById(req.params.id, function(err, team) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json(team);
         }
       });
     });
