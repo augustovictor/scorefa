@@ -1,6 +1,19 @@
 // Revealing module pattern
 var teamController = function(Team) {
 
+  var teamMiddleware = function(req, res, next) {
+    Team.findById(req.params.id, function(err, team) {
+          if (err) {
+            res.status(500).send(err);
+          } else if (team) {
+            req.team = team;
+            next();
+          } else {
+            res.status(404).send('No teams found.');
+          }
+        });
+  };
+
   var get = function(req, res) {
     var query = {};
     if (req.query.name) {
@@ -17,13 +30,7 @@ var teamController = function(Team) {
   };
 
   var getOne = function(req, res) {
-    Team.findById(req.params.id, function(err, team) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.json(team);
-      }
-    });
+    res.json(req.team);
   };
 
   var post = function(req, res) {
@@ -32,10 +39,21 @@ var teamController = function(Team) {
     res.send(201).send(team); // Created
   };
 
+  var put = function(req, res) {
+    Team.findById(req.params.id, function(err, team) {
+      req.team.name = req.body.name;
+      req.team.coach = req.body.coach;
+      req.team.save();
+      res.json(req.team);
+    });
+  };
+
   return {
     get: get,
     getOne: getOne,
-    post: post
+    post: post,
+    put: put,
+    teamMiddleware: teamMiddleware
   };
 
 };
