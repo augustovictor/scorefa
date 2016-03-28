@@ -13,7 +13,8 @@ var routes = function(Team) {
 
   teamRouter.route('/:id')
     .get(teamController.getOne)
-    .put(teamController.put);
+    .put(teamController.put)
+    .patch(teamController.patch);
 
   return teamRouter;
 

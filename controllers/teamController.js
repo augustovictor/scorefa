@@ -48,11 +48,29 @@ var teamController = function(Team) {
     });
   };
 
+  var patch = function(req, res) {
+    if (req.body._id) {
+      delete req.body._id;
+    }
+    for (var param in req.body) {
+      req.team[param] = req.body[param];
+    }
+
+    req.team.save(function(err) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json(req.team);
+      }
+    });
+  };
+
   return {
     get: get,
     getOne: getOne,
     post: post,
     put: put,
+    patch: patch,
     teamMiddleware: teamMiddleware
   };
 
