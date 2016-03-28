@@ -65,12 +65,23 @@ var teamController = function(Team) {
     });
   };
 
+  var remove = function(req, res) {
+    req.team.remove(function(err) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(204).send('Removed');
+      }
+    });
+  };
+
   return {
     get: get,
     getOne: getOne,
     post: post,
     put: put,
     patch: patch,
+    remove: remove,
     teamMiddleware: teamMiddleware
   };
 
