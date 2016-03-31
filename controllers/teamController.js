@@ -20,7 +20,7 @@ var teamController = function(Team) {
       query.name = req.query.name;
     }
 
-    Team.find(query, function(err, teams) {
+    Team.findAll(query, function(err, teams) {
         if (err) {
           res.status(500).send(err);
         } else {

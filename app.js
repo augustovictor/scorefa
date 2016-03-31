@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 //Models
-var Team = require('./models/teamModel');
+var Team = require('./models/team');
 
 //Routes
 var teamRouter = require('./routes/teamRoutes')(Team);
