@@ -1,3 +1,5 @@
+var models = require('../models/index');
+
 // Revealing module pattern
 var teamController = function(Team) {
 
@@ -20,13 +22,17 @@ var teamController = function(Team) {
       query.name = req.query.name;
     }
 
-    Team.findAll(query, function(err, teams) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(teams);
-        }
-      });
+    models.Team.findAll({query}).then((teams) => {
+      res.json(teams);
+    });
+
+    // Team.findAll(query, function(err, teams) {
+    //     if (err) {
+    //       res.status(500).send(err);
+    //     } else {
+    //       res.json(teams);
+    //     }
+    //   });
   };
 
   var getOne = function(req, res) {
@@ -34,15 +40,20 @@ var teamController = function(Team) {
   };
 
   var post = function(req, res) {
-    var team = new Team(req.body); // Only creates a new instance of team
+    // var team = new Team(req.body); // Only creates a new instance of team
 
     if (!req.body.name) {
       res.status(400);
       res.send('Name is required');
     } else {
-      team.save();
-      res.status(201);
-      res.send(team); // Created
+      models.Team.create({
+          name:  req.body.name,
+          coach: req.body.coach
+        }) .then((team) => {
+          res.status(201);
+          res.send(team); // Created
+        });
+      //   team.create();
     }
   };
 
