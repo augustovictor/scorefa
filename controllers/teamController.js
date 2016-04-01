@@ -4,16 +4,15 @@ var models = require('../models/index');
 var teamController = function(Team) {
 
   var teamMiddleware = function(req, res, next) {
-    Team.findById(req.params.id, function(err, team) {
-          if (err) {
-            res.status(500).send(err);
-          } else if (team) {
-            req.team = team;
-            next();
-          } else {
-            res.status(404).send('No teams found.');
-          }
-        });
+
+    models.Team.find({
+      where: {
+        id: req.param.id
+      }
+    }).then(team => {
+      req.team = team;
+      next();
+    });
   };
 
   var get = function(req, res) {
@@ -24,6 +23,8 @@ var teamController = function(Team) {
 
     models.Team.findAll({query}).then((teams) => {
       res.json(teams);
+    }).catch(err => {
+      res.status(500).send(err);
     });
 
     // Team.findAll(query, function(err, teams) {
@@ -49,9 +50,11 @@ var teamController = function(Team) {
       models.Team.create({
           name:  req.body.name,
           coach: req.body.coach
-        }) .then((team) => {
+        }).then((team) => {
           res.status(201);
           res.send(team); // Created
+        }).catch(err => {
+          // Error
         });
       //   team.create();
     }
