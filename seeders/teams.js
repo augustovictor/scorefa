@@ -1,6 +1,9 @@
 'use strict';
 // sequelize db:seed:all
+// sequelize db:seed --seed seeders/teams.js
+
 // sequelize:db:seed:undo:all
+// sequelize db:seed:undo --seed seeders/teams.js
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
