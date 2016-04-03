@@ -10,8 +10,16 @@ var teamController = function(Team) {
         id: req.params.id
       }
     }).then(team => {
-      req.team = team;
-      next();
+      if (team) {
+        req.team = team;
+        next();
+      } else {
+        res.status(404).send('No teams found.');
+
+      }
+    }).catch(err => {
+      res.status(500).send(err);
+
     });
   };
 
@@ -26,14 +34,6 @@ var teamController = function(Team) {
     }).catch(err => {
       res.status(500).send(err);
     });
-
-    // Team.findAll(query, function(err, teams) {
-    //     if (err) {
-    //       res.status(500).send(err);
-    //     } else {
-    //       res.json(teams);
-    //     }
-    //   });
   };
 
   var getOne = function(req, res) {
