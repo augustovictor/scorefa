@@ -1,14 +1,15 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Team = sequelize.define('Team', {
+  var Player = sequelize.define('Player', {
     name: DataTypes.STRING,
-    coach: DataTypes.STRING
+    number: DataTypes.INTEGER,
+    team_id: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        Team.hasMany(models.Player, {as: 'Players'});
+        Player.belongsTo(models.Team);
       }
     }
   });
-  return Team;
+  return Player;
 };
