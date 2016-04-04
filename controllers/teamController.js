@@ -52,7 +52,7 @@ var teamController = function(Team) {
           res.status(201);
           res.send(team); // Created
         }).catch(err => {
-          // Error
+          res.send(err);
         });
     }
   };
