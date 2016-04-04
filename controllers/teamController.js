@@ -70,13 +70,17 @@ var teamController = function(Team) {
   };
 
   var remove = function(req, res) {
-    req.team.remove(function(err) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(204).send('Removed');
+
+    req.team.destroy({
+      where: {
+        id: req.team.id
       }
+    }).then(team => {
+      res.status(204).send('Team removed');
+    }).catch(err => {
+      res.status(500).send(err);
     });
+
   };
 
   return {
