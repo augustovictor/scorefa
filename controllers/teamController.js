@@ -15,11 +15,9 @@ var teamController = function(Team) {
         next();
       } else {
         res.status(404).send('No teams found.');
-
       }
     }).catch(err => {
       res.status(500).send(err);
-
     });
   };
 
@@ -56,16 +54,18 @@ var teamController = function(Team) {
         }).catch(err => {
           // Error
         });
-      //   team.create();
     }
   };
 
   var put = function(req, res) {
-    Team.findById(req.params.id, function(err, team) {
-      req.team.name = req.body.name;
-      req.team.coach = req.body.coach;
-      req.team.save();
-      res.json(req.team);
+    console.log(req);
+    req.team.updateAttributes({
+      name: req.body.name,
+      coach: req.body.coach
+    }).then(team => {
+      res.send(team);
+    }).catch(err => {
+      res.send(err);
     });
   };
 
