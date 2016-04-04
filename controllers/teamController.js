@@ -69,23 +69,6 @@ var teamController = function(Team) {
     });
   };
 
-  var patch = function(req, res) {
-    if (req.body._id) {
-      delete req.body._id;
-    }
-    for (var param in req.body) {
-      req.team[param] = req.body[param];
-    }
-
-    req.team.save(function(err) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.json(req.team);
-      }
-    });
-  };
-
   var remove = function(req, res) {
     req.team.remove(function(err) {
       if (err) {
@@ -101,7 +84,6 @@ var teamController = function(Team) {
     getOne: getOne,
     post: post,
     put: put,
-    patch: patch,
     remove: remove,
     teamMiddleware: teamMiddleware
   };

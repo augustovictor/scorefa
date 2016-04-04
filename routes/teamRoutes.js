@@ -14,7 +14,6 @@ var routes = function(Team) {
   teamRouter.route('/:id')
     .get(teamController.getOne)
     .put(teamController.put)
-    .patch(teamController.patch)
     .delete(teamController.remove);
 
   return teamRouter;
