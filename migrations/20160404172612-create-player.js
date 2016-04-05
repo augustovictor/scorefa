@@ -14,7 +14,7 @@ module.exports = {
       number: {
         type: Sequelize.INTEGER
       },
-      team_id: {
+      teamId: {
         type: Sequelize.INTEGER,
         model: 'Team', // table name, not object name
         key: 'id' // Column name

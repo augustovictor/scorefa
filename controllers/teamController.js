@@ -7,8 +7,9 @@ var teamController = function(Team) {
 
     models.Team.find({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
+      include: [models.Player]
     }).then(team => {
       if (team) {
         req.team = team;
