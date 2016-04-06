@@ -4,7 +4,7 @@ var mocha = require('gulp-mocha');
 
 gulp.task('default', function() {
   nodemon({
-    script: 'app.js',
+    script: './lib/app/app.js',
     ext: 'js',
     env: {
       PORT: 3000

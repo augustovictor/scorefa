@@ -2,10 +2,10 @@
   "name": "scorefa",
   "version": "1.0.0",
   "description": "It's an app of american football games and scores",
-  "main": "app.js",
+  "main": "/lib/app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node /lib/app/app.js"
   },
   "repository": {
     "type": "git",
